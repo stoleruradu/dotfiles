@@ -20,8 +20,6 @@ call plug#begin()
     Plug 'hrsh7th/nvim-compe'
     Plug 'hrsh7th/vim-vsnip'
     Plug 'hrsh7th/vim-vsnip-integ'
-    " Plug 'RishabhRD/popfix'
-    " Plug 'RishabhRD/nvim-lsputils'
     Plug 'glepnir/lspsaga.nvim'
     Plug 'hoob3rt/lualine.nvim'
     Plug 'glepnir/dashboard-nvim'
