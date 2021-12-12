@@ -5,13 +5,14 @@ endif
 call plug#begin()
     Plug 'morhetz/gruvbox'
     Plug 'mbbill/undotree'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
-    Plug 'preservim/nerdtree'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'junegunn/gv.vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'godlygeek/tabular'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -19,9 +20,10 @@ call plug#begin()
     Plug 'hrsh7th/nvim-compe'
     Plug 'hrsh7th/vim-vsnip'
     Plug 'hrsh7th/vim-vsnip-integ'
-    Plug 'RishabhRD/popfix'
-    Plug 'RishabhRD/nvim-lsputils'
+    " Plug 'RishabhRD/popfix'
+    " Plug 'RishabhRD/nvim-lsputils'
     Plug 'glepnir/lspsaga.nvim'
     Plug 'hoob3rt/lualine.nvim'
+    Plug 'glepnir/dashboard-nvim'
 call plug#end()
 

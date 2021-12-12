@@ -7,8 +7,7 @@ set re=0
 set encoding=utf8
 
 set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=4 softtabstop=4 shiftwidth=4
 set expandtab
 set nu
 set smartindent
@@ -18,13 +17,14 @@ set noswapfile
 set nobackup
 set undofile
 set incsearch
+set list
+set listchars=tab:▸\ ,trail:·
 set relativenumber
-set colorcolumn=160
+set colorcolumn=80
 set backspace=indent,eol,start
 set cmdheight=2
 set updatetime=300
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-" set guifont=DroidSansMono_Nerd_Font:h11
 set splitbelow splitright
 set cursorline
 set shortmess+=c
@@ -41,6 +41,7 @@ hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 " Fix Sizing Bug With Alacritty Terminal
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
+let g:dashboard_default_executive ='telescope'
 " Plug init
 runtime ./plug.vim
 
@@ -68,9 +69,8 @@ nnoremap <leader>w <C-W>q
 nnoremap <S-u> <C-r>
 
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+nnoremap <leader>e :NvimTreeToggle<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
 
 nnoremap <silent> <Leader>t :split \| :terminal<CR>
 nnoremap <silent> <Leader>tt :vsplit \| :terminal<CR>
@@ -102,12 +102,17 @@ tnoremap <Esc> <C-\><C-n>
 inoremap <C-c> <esc>
 inoremap ii <Esc>
 
+" Open new line below and above current line
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
 " Remove search highlight
 nnoremap <silent> <leader>/ :noh<CR>
 
-lua require('plugin/lualine')
-lua require('plugin/treesitter')
-lua require('plugin/lsp-config')
-lua require('plugin/compe') 
-lua require('plugin/code-actions')
+lua require('plugins/configs/lualine')
+lua require('plugins/configs/nvimtree')
+lua require('plugins/configs/treesitter')
+lua require('plugins/configs/lspconfig')
+lua require('plugins/configs/compe') 
+lua require('plugins/configs/telescope')
 

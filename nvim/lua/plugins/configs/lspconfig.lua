@@ -1,10 +1,10 @@
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = require'lspconfig'
 local protocol = require'vim.lsp.protocol'
 
 _G.lsp_organize_imports = function()
     local params = {
         command = "_typescript.organizeImports",
-        arguments = {vim.api.nvim_buf_get_name(0)},
+        arguments = { vim.api.nvim_buf_get_name(0) },
         title = ""
     }
     vim.lsp.buf.execute_command(params)
@@ -12,6 +12,7 @@ end
 
 local on_attach = function(client, bufnr)
     local buf_map = vim.api.nvim_buf_set_keymap
+
     vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
     vim.cmd("command! Format lua vim.lsp.buf.formatting()")
     vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
@@ -25,7 +26,8 @@ local on_attach = function(client, bufnr)
     vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
     vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
     vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
-    buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
+
+    buf_map(bufnr, "n", "gd", ":LspDef<CR>", { silent = true })
     buf_map(bufnr, "n", "gR", ":LspRename<CR>", {silent = true})
     buf_map(bufnr, "n", "gr", ":LspRefs<CR>", {silent = true})
     buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>", {silent = true})
@@ -36,38 +38,40 @@ local on_attach = function(client, bufnr)
     buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>", {silent = true})
     buf_map(bufnr, "n", "<Leader><space>", ":LspDiagLine<CR>", {silent = true})
     buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", {silent = true})
+
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
         vim.api.nvim_command [[augroup END]]
     end
-protocol.CompletionItemKind = {
-    '', -- Text
-    '', -- Method
-    '', -- Function
-    '', -- Constructor
-    '', -- Field
-    '', -- Variable
-    '', -- Class
-    'ﰮ', -- Interface
-    '', -- Module
-    '', -- Property
-    '', -- Unit
-    '', -- Value
-    '', -- Enum
-    '', -- Keyword
-    '﬌', -- Snippet
-    '', -- Color
-    '', -- File
-    '', -- Reference
-    '', -- Folder
-    '', -- EnumMember
-    '', -- Constant
-    '', -- Struct
-    '', -- Event
-    'ﬦ', -- Operator
-    '', -- TypeParameter
+
+    protocol.CompletionItemKind = {
+        '', -- Text
+        '', -- Method
+        '', -- Function
+        '', -- Constructor
+        '', -- Field
+        '', -- Variable
+        '', -- Class
+        'ﰮ', -- Interface
+        '', -- Module
+        '', -- Property
+        '', -- Unit
+        '', -- Value
+        '', -- Enum
+        '', -- Keyword
+        '﬌', -- Snippet
+        '', -- Color
+        '', -- File
+        '', -- Reference
+        '', -- Folder
+        '', -- EnumMember
+        '', -- Constant
+        '', -- Struct
+        '', -- Event
+        'ﬦ', -- Operator
+        '', -- TypeParameter
   }
 end
 
@@ -76,7 +80,7 @@ nvim_lsp.tsserver.setup {
         client.resolved_capabilities.document_formatting = false
         on_attach(client)
     end,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
 }
 
 nvim_lsp.diagnosticls.setup {
@@ -124,15 +128,14 @@ nvim_lsp.diagnosticls.setup {
     },
     formatFiletypes = {
       css = 'prettier',
-      javascript = 'eslint_d',
-      javascriptreact = 'eslint_d',
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
+      markdown = 'prettier',
+      javascript = 'eslint_d',
+      javascriptreact = 'eslint_d',
       typescript = 'eslint_d',
       typescriptreact = 'eslint_d',
-      json = 'prettier',
-      markdown = 'prettier',
     }
   }
 }
@@ -162,7 +165,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     --}
   }
 )
-vim.fn.sign_define('LspDiagnosticsSignError', { text = "", texthl = "LspDiagnosticsDefaultError" })
+
+vim.fn.sign_define('LspDiagnosticsSignError', { text = "●", texthl = "LspDiagnosticsDefaultError" })
 vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ' ', texthl = "LspDiagnosticsDefaultWarning" })
 vim.fn.sign_define('LspDiagnosticsSignInformation', { text = "", texthl = "LspDiagnosticsDefaultInformation" })
 vim.fn.sign_define('LspDiagnosticsSignHint', { text = "", texthl = "LspDiagnosticsDefaultHint" })

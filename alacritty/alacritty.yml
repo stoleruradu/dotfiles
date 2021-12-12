@@ -84,3 +84,5 @@ cursor:
 
 key_bindings:
     - { key: N, mods: Control, action: SpawnNewInstance }
+    - { key: F,    mods: Control, chars: "\x1b[C" }
+    - { key: B,    mods: Control, chars: "\x1b[D" }
