@@ -112,3 +112,4 @@ require('plugins.configs.lualine')
 require('plugins.configs.nvimtree')
 require('plugins.configs.treesitter')
 require('plugins.configs.telescope')
+-- require('plugins.configs.lspsaga') // lspsaga is bugy on neovim 0.6.0
