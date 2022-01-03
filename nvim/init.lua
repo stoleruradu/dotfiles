@@ -46,7 +46,7 @@ cmd [[
     autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 ]]
 
-cmd 'runtime ./plug.vim'
+require('plugins')
 
 cmd [[
 if exists("&termguicolors") && exists("&winblend")
@@ -106,10 +106,10 @@ vim.api.nvim_set_keymap('n', '<leader>/', ':noh<cr>', { noremap = true, silent =
 vim.api.nvim_set_keymap('n', '<C-s>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>', { noremap = true })
 
-require('plugins.configs.compe') 
-require('plugins.configs.lspconfig')
-require('plugins.configs.lualine')
-require('plugins.configs.nvimtree')
-require('plugins.configs.treesitter')
-require('plugins.configs.telescope')
+require('configs.compe')
+require('configs.lspconfig')
+require('configs.lualine')
+require('configs.nvimtree')
+require('configs.treesitter')
+require('configs.telescope')
 -- require('plugins.configs.lspsaga') // lspsaga is bugy on neovim 0.6.0
