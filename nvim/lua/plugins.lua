@@ -35,7 +35,7 @@ packer.init {
 }
 
 -- Install your plugins here
-return packer.startup(function(use)
+packer.startup( function(use)
     use { 'wbthomason/packer.nvim' } -- packer can manage itself
     use 'morhetz/gruvbox'
     use 'mbbill/undotree'
@@ -66,9 +66,15 @@ return packer.startup(function(use)
     }
 
     -- Git
-    -- use "lewis6991/gitsigns.nvim"
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        },
+        config = function() require('gitsigns').setup() end, -- figure out why this hook is not working as expected
+    }
     use 'tpope/vim-fugitive'
-    use 'airblade/vim-gitgutter'
+    -- use 'airblade/vim-gitgutter'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -76,3 +82,5 @@ return packer.startup(function(use)
     require("packer").sync()
   end
 end)
+
+return packer

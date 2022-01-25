@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local opt = vim.opt
+local exists = vim.fn.exists;
 
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
@@ -48,17 +49,14 @@ cmd [[
 
 require('plugins')
 
-cmd [[
-if exists("&termguicolors") && exists("&winblend")
-    set termguicolors
-    set winblend=0
-    set wildoptions=pum
-    set pumblend=5
-    set background=dark
-
-    colorscheme gruvbox
-endif
-]]
+if exists("&termguicolors") and exists("&winblend") then
+    opt.termguicolors = true
+    opt.winblend = 0
+    opt.wildoptions = 'pum'
+    opt.pumblend = 5
+    opt.background = 'dark'
+    cmd 'colorscheme gruvbox'
+end
 
 vim.g.mapleader = ' '
 
@@ -112,4 +110,6 @@ require('configs.lualine')
 require('configs.nvimtree')
 require('configs.treesitter')
 require('configs.telescope')
+
+require('gitsigns').setup()
 -- require('plugins.configs.lspsaga') // lspsaga is bugy on neovim 0.6.0

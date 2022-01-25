@@ -1,6 +1,3 @@
-" GIT
-let g:gitgutter_sign_allow_clobber = 1
-
 nnoremap <leader>ga :diffget //2<CR> " fetches the hunk from the target parent (on the left)
 nnoremap <leader>gd :diffget //3<CR> " fetches the hunk from the merge parent (on the right)
 nnoremap <leader>gff :Gvdiffsplit!<CR>
