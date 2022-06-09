@@ -106,10 +106,13 @@ vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>',
 
 require('configs.compe')
 require('configs.lspconfig')
+require('configs.json')
 require('configs.lualine')
 require('configs.nvimtree')
 require('configs.treesitter')
 require('configs.telescope')
 
 require('gitsigns').setup()
+require('neoscroll').setup()
+
 -- require('plugins.configs.lspsaga') // lspsaga is bugy on neovim 0.6.0

@@ -17,5 +17,6 @@ vim.api.nvim_set_keymap('n', ';b', '<cmd>Telescope buffers<cr>', { noremap = tru
 vim.api.nvim_set_keymap('n', ';a', '<cmd>Telescope lsp_code_actions<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', ';m', '<cmd>Telescope keymaps<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', ';s', '<cmd>Telescope git_status<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', ';r', '<cmd>Telescope lsp_references<cr>', { noremap = true })
 
 return telescope;

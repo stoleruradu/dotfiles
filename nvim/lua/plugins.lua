@@ -26,6 +26,7 @@ vim.cmd [[
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
+
 if not status_ok then
   return
 end
@@ -33,6 +34,8 @@ end
 packer.init {
   compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
 }
+
+packer.reset()
 
 -- Install your plugins here
 packer.startup( function(use)
@@ -46,8 +49,6 @@ packer.startup( function(use)
     use 'editorconfig/editorconfig-vim'
     use 'godlygeek/tabular'
     use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
     use 'glepnir/lspsaga.nvim'
     use 'hoob3rt/lualine.nvim'
     use 'glepnir/dashboard-nvim'
@@ -71,10 +72,16 @@ packer.startup( function(use)
         requires = {
             'nvim-lua/plenary.nvim'
         },
-        config = function() require('gitsigns').setup() end, -- figure out why this hook is not working as expected
+         config = function() require('gitsigns').setup() end, -- figure out why this hook is not working as expected
     }
-    use 'tpope/vim-fugitive'
+
+    use { 
+        'tpope/vim-fugitive'
+    }
     -- use 'airblade/vim-gitgutter'
+    use 'lukas-reineke/indent-blankline.nvim'
+
+    use 'karb94/neoscroll.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
