@@ -7,6 +7,7 @@ telescope.setup {
     initial_mode = 'normal'
    }
 }
+
 telescope.load_extension('fzf')
 
 vim.api.nvim_set_keymap('n', ';f', '<cmd>Telescope find_files<cr>', { noremap = true })

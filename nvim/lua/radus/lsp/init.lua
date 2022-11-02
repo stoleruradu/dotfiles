@@ -1,5 +1,6 @@
 local nvim_lsp = require'lspconfig'
 local protocol = require'vim.lsp.protocol'
+local util = require 'lspconfig.util'
 
 _G.lsp_organize_imports = function()
     local params = {
@@ -14,7 +15,7 @@ local on_attach = function(client, bufnr)
     local buf_map = vim.api.nvim_buf_set_keymap
 
     vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
-    vim.cmd("command! Format lua vim.lsp.buf.formatting()")
+    vim.cmd("command! Format lua vim.lsp.buf.format { async = true }")
     vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
     vim.cmd("command! LspHover lua vim.lsp.buf.hover()")
     vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
@@ -39,7 +40,7 @@ local on_attach = function(client, bufnr)
     buf_map(bufnr, "n", "<Leader><space>", ":LspDiagLine<CR>", { silent = true })
     buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", { silent = true })
 
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
@@ -77,18 +78,33 @@ end
 
 nvim_lsp.tsserver.setup {
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
         on_attach(client, bufnr)
     end,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" }
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
+    root_dir = util.root_pattern("tsconfig.json", ".git")
 }
 
 nvim_lsp.eslint.setup({
+  -- cmd = { "vscode-eslint-language-server", "--stdio", "--ignore-pattern **/node_modules/**" },
+  --settings = {
+  --  options = {
+  --      ignorePatterns = { "node_modules/**" } 
+  --  }
+  --},
+  root_dir = util.root_pattern(
+      '.eslintrc',
+      '.eslintrc.js',
+      '.eslintrc.cjs',
+      '.eslintrc.yaml',
+      '.eslintrc.yml',
+      '.eslintrc.json'
+  ),
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
+     client.server_capabilities.documentRangeFormattingProvider = true
 
-    vim.api.nvim_command [[autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll]]
+    -- vim.api.nvim_command [[autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll]]
   end,
 })
 
@@ -106,9 +122,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+require('radus.lsp.json')
 
 return nvim_lsp

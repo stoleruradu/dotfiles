@@ -5,4 +5,5 @@ htop/
 iterm2/
 nvim-back/
 vifm/
-packer_compiled.lua
+**/packer_compiled.lua
+yarn/
