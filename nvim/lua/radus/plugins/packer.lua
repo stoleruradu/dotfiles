@@ -1,15 +1,15 @@
 -- auto install packer if not installed
 local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+        vim.cmd([[packadd packer.nvim]])
+        return true
+    end
 
-	return false
+    return false
 end
 
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
@@ -24,10 +24,10 @@ vim.cmd([[
 ]])
 
 -- import packer safely
-local status, packer = pcall(require, "packer")
+local status, packer = pcall(require, 'packer')
 
 if not status then
-	return
+    return
 end
 
 return packer.startup(function(use)
@@ -63,17 +63,17 @@ return packer.startup(function(use)
     use 'glepnir/dashboard-nvim'
 
     -- LSP
-    use "neovim/nvim-lspconfig" -- enable LSP
+    use 'neovim/nvim-lspconfig' -- enable LSP
 
     -- Telescope
-    use "nvim-telescope/telescope.nvim"
+    use 'nvim-telescope/telescope.nvim'
 
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Treesitter
     use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
     }
 
     -- Git
@@ -82,8 +82,8 @@ return packer.startup(function(use)
         requires = {
             'nvim-lua/plenary.nvim'
         },
-         config = function() 
-         end,
+        config = function()
+        end,
     }
 
     use { 'tpope/vim-fugitive' }
@@ -94,14 +94,14 @@ return packer.startup(function(use)
     use 'karb94/neoscroll.nvim'
 
     use({
-        "glepnir/lspsaga.nvim",
-        branch = "main"
+        'glepnir/lspsaga.nvim',
+        branch = 'main'
     })
 
-    use { "williamboman/mason.nvim" }
+    use { 'williamboman/mason.nvim' }
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
-      packer.sync()
+        packer.sync()
     end
 end)
