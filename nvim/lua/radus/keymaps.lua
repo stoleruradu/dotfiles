@@ -2,7 +2,6 @@ vim.api.nvim_set_keymap('', 'q', '<nop>', {})
 vim.api.nvim_set_keymap('n', '<S-u>', '<C-r>', { noremap = true })
 
 vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', { noremap = true })
-vim.api.nvim_set_keymap('i', 'ii', '<esc>', { noremap = true })
 
 vim.api.nvim_set_keymap('t', '<esc>', '<C-\\><C-n>', { noremap = true })
 

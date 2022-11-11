@@ -30,7 +30,7 @@ if not status then
 	return
 end
 
-packer.startup(function(use)
+return packer.startup(function(use)
     -- Install your plugins here
     use { 'wbthomason/packer.nvim' } -- packer can manage itself
 
@@ -87,10 +87,16 @@ packer.startup(function(use)
     }
 
     use { 'tpope/vim-fugitive' }
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
     -- use 'airblade/vim-gitgutter'
     use 'lukas-reineke/indent-blankline.nvim'
 
     use 'karb94/neoscroll.nvim'
+
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main"
+    })
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -98,5 +104,3 @@ packer.startup(function(use)
       packer.sync()
     end
 end)
-
-return plugins

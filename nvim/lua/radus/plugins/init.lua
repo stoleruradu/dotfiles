@@ -6,5 +6,9 @@ require('radus.plugins.configs.nvimtree')
 require('radus.plugins.configs.treesitter')
 require('radus.plugins.configs.telescope')
 require('radus.plugins.configs.gitsigns')
+require('radus.plugins.configs.lspsaga')
 
 require('neoscroll').setup()
+require('neogit').setup({
+    kind = 'split'
+})
