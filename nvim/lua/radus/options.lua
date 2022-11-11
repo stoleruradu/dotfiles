@@ -25,6 +25,7 @@ opt.list = true
 opt.listchars = 'tab:▸ ,trail:·'
 opt.relativenumber = true
 opt.colorcolumn = '110'
+opt.completeopt = 'menuone,noselect'
 opt.backspace = 'indent,eol,start'
 opt.cmdheight = 1
 opt.updatetime = 300
