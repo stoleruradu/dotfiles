@@ -1,6 +1,9 @@
 _G.git_push_set_upstream = function()
     print('Pushing...')
-    vim.api.nvim_command(':G push -u origin ' .. vim.fn.FugitiveHead())
+
+    local branch = vim.fn.FugitiveHead()
+    vim.api.nvim_command(':G push -u origin ' .. branch)
+
     print('Pushed! 🤩')
 end
 
