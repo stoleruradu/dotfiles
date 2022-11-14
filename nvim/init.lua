@@ -1,6 +1,6 @@
 require('radus.options')
 require('radus.globals')
-require('radus.commands')
+require('radus.windows')
 require('radus.keymaps')
 
 require('radus.plugins')

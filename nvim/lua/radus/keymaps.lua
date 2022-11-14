@@ -34,6 +34,7 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFindFile<cr>', { noremap = t
 
 vim.api.nvim_set_keymap('n', '<leader>t', ':split | :terminal<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tt', ':vsplit | :terminal<cr>', { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap('n', '<leader>=', ':vertical resize +5<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<cr>', { noremap = true, silent = true })
 
