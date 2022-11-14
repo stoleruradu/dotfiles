@@ -48,10 +48,10 @@ vim.api.nvim_create_autocmd({ 'WinClosed' }, {
     end,
 })
 
-vim.keymap.set('n', '<leader>tp', command_hof(), { desc = 'Reopens previous closed terminal window' })
+vim.keymap.set('n', '<C-W>P', command_hof(), { desc = 'Reopens previous closed terminal window' })
 vim.keymap.set('n', '<C-W>p', command_hof({ vertical = true }),
     { desc = 'Reopens previous closed window in a vertical split' })
-vim.keymap.set('n', '<C-T>p', function()
+vim.keymap.set('n', '<leader>tp', function()
     local terminal = terminals.pop()
 
     if vim.fn.buflisted(terminal) ~= 1 then
