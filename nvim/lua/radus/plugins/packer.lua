@@ -99,6 +99,7 @@ return packer.startup(function(use)
     })
 
     use { 'williamboman/mason.nvim' }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then

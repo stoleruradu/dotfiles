@@ -7,11 +7,20 @@ _G.git_push_set_upstream = function()
     print('Pushed! 🤩')
 end
 
+_G.git_reset_hard_origin = function()
+    local branch = vim.fn.FugitiveHead()
+
+    vim.api.nvim_command(':G fetch origin')
+    vim.api.nvim_command(':G reset --hard origin/' .. branch)
+end
+
 vim.api.nvim_set_keymap('n', '<leader>ga', ':diffget //2<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gd', ':diffget //3<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gff', ':Gvdiffsplit!<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gs', ':G<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gv', ':GV<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':lua git_push_set_upstream()<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gbr', ':lua git_reset_hard_origin()<cr>', { noremap = true })
 
 require('gitsigns').setup {
     on_attach = function(bufnr)
@@ -37,12 +46,13 @@ require('gitsigns').setup {
         end, { expr = true })
 
         -- Actions
-        map({ 'n', 'v' }, '<leader>hs', ':gitsigns stage_hunk<cr>')
-        map({ 'n', 'v' }, '<leader>hr', ':gitsigns reset_hunk<cr>')
+        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<cr>')
+        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<cr>')
+
         map('n', '<leader>hS', gs.stage_buffer)
         map('n', '<leader>hR', gs.reset_buffer)
         map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hp', gs.preview_hunk)
+        map('n', '<leader>hs', gs.preview_hunk)
         map('n', '<leader>hb', function() gs.blame_line { full = true } end)
         map('n', '<leader>tb', gs.toggle_current_line_blame)
         map('n', '<leader>hd', gs.diffthis)
@@ -50,6 +60,6 @@ require('gitsigns').setup {
         map('n', '<leader>td', gs.toggle_deleted)
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<c-u>gitsigns select_hunk<cr>')
+        map({ 'o', 'x' }, 'ih', ':<c-u>Gitsigns select_hunk<cr>')
     end
 }
