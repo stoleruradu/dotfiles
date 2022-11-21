@@ -9,10 +9,16 @@ cmd 'filetype indent plugin on'
 opt.path = opt.path + '**';
 opt.re = 0
 opt.encoding = 'utf8'
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
+
+-- tell vim how many columns a tab counts for
+opt.tabstop = 2
+-- control how many columns vim uses when you hit Tab in insert mode
+opt.softtabstop = 2
+-- to control how many columns text is indented with the reindent operations (<< and >>)
+opt.shiftwidth = 2
+-- hitting Tab in insert mode will produce the appropriate number of spaces
 opt.expandtab = true
+
 opt.nu = true
 opt.smartindent = true
 opt.wrap = false
@@ -29,25 +35,24 @@ opt.completeopt = 'menuone,noselect'
 opt.backspace = 'indent,eol,start'
 opt.cmdheight = 1
 opt.updatetime = 300
-opt.grepprg = "rg --vimgrep --smart-case --follow"
+opt.grepprg = 'rg --vimgrep --smart-case --follow'
 opt.splitbelow = true
 opt.splitright = true
 opt.cursorline = true
 opt.shortmess = opt.shortmess + 'c'
 opt.wildignore:append({
-    '**/coverage/*',
-    '**/node_modules/*',
-    '**/android/*',
-    '**/ios/*',
-    '**/.git/*'
+  '**/coverage/*',
+  '**/node_modules/*',
+  '**/android/*',
+  '**/ios/*',
+  '**/.git/*'
 })
 
-if exists("&termguicolors") and exists("&winblend") then
-    opt.termguicolors = true
-    opt.winblend = 0
-    opt.wildoptions = 'pum'
-    opt.pumblend = 5
-    opt.background = 'dark'
-    cmd 'colorscheme gruvbox'
+if exists('&termguicolors') and exists('&winblend') then
+  opt.termguicolors = true
+  opt.winblend = 0
+  opt.wildoptions = 'pum'
+  opt.pumblend = 5
+  opt.background = 'dark'
+  cmd 'colorscheme gruvbox'
 end
-

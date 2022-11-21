@@ -52,8 +52,6 @@ return packer.startup(function(use)
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
     }
 
-    use 'editorconfig/editorconfig-vim'
-
     use 'godlygeek/tabular'
 
     use 'hrsh7th/nvim-compe'
@@ -87,6 +85,7 @@ return packer.startup(function(use)
     }
 
     use { 'tpope/vim-fugitive' }
+
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
     -- use 'airblade/vim-gitgutter'
     use 'lukas-reineke/indent-blankline.nvim'

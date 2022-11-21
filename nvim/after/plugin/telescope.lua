@@ -1,9 +1,9 @@
 local telescope = require('telescope')
 
 telescope.setup {
-   defaults = {
+  defaults = {
     initial_mode = 'normal'
-   },
+  },
 }
 
 telescope.load_extension('fzf')

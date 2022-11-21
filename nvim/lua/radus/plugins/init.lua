@@ -1,6 +1,6 @@
 require('radus.plugins.packer')
 require('neoscroll').setup()
 require('neogit').setup({
-    kind = 'split'
+  kind = 'split'
 })
-require("mason").setup()
+require('mason').setup()
