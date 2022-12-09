@@ -11,7 +11,7 @@ _G.lsp_organize_imports = function()
   vim.lsp.buf.execute_command(params)
 end
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_client, bufnr)
   local buf_map = vim.api.nvim_buf_set_keymap
 
   vim.cmd('command! LspDef lua vim.lsp.buf.definition()')
@@ -41,11 +41,11 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, 'i', '<C-x><C-x>', '<cmd> LspSignatureHelp<CR>', { silent = true })
 
   -- if client.server_capabilities.documentFormattingProvider then
-  --     vim.api.nvim_command [[augroup Format]]
-  --     vim.api.nvim_command [[autocmd! * <buffer>]]
-  --     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-  --     vim.api.nvim_command [[augroup END]]
-  -- end
+  --      vim.api.nvim_command [[augroup Format]]
+  --      vim.api.nvim_command [[autocmd! * <buffer>]]
+  --      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+  --      vim.api.nvim_command [[augroup END]]
+  --  end
 
   protocol.CompletionItemKind = {
     '', -- Text
@@ -79,6 +79,8 @@ end
 nvim_lsp.tsserver.setup {
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+
     on_attach(client, bufnr)
   end,
   filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript' },
@@ -86,20 +88,6 @@ nvim_lsp.tsserver.setup {
 }
 
 nvim_lsp.eslint.setup({
-  -- cmd = { "vscode-eslint-language-server", "--stdio", "--ignore-pattern **/node_modules/**" },
-  --settings = {
-  --  options = {
-  --      ignorePatterns = { "node_modules/**" }
-  --  }
-  --},
-  root_dir = util.root_pattern(
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json'
-  ),
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
@@ -128,63 +116,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local runtime_path = vim.split(package.path, ';')
-
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
-
--- By default, lua-language-server doesn't have a cmd set. This is because nvim-lspconfig does not
--- make assumptions about your path. You must add the following to your init.vim or init.lua to set
--- cmd to the absolute path ($HOME and ~ are not expanded) of your unzipped and compiled lua-language-server.
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
-
-nvim_lsp.sumneko_lua.setup({
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
-    on_attach(client, bufnr)
-  end,
-  settings = {
-    Lua = {
-      format = {
-        enable = true,
-        -- Put format options here
-        -- NOTE: the value should be STRING!!
-        defaultConfig = {
-          indent_style = 'space', -- ignored and used from editor settings
-          indent_size = '2', -- ignored and used from editor settings
-          quote_style = 'single',
-        }
-      },
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        -- For some reason havin setting this line below as the docs suggest
-        -- open a quick-fix window every time you jump to a reference
-        -- library = vim.api.nvim_get_runtime_file("", true),
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.stdpath('config') .. '/lua'] = true,
-        },
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-})
-
 require('radus.lsp.json')
--- require('radus.lsp.lualang')
+require('radus.lsp.luals')
 
 return nvim_lsp

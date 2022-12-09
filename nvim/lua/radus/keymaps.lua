@@ -37,5 +37,8 @@ vim.api.nvim_set_keymap('n', '<leader>tt', ':vsplit | :terminal<cr>', { noremap 
 vim.api.nvim_set_keymap('n', '<leader>=', ':vertical resize +5<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<cr>', { noremap = true, silent = true })
 
+-- vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+
 vim.api.nvim_set_keymap('n', '<C-s>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>', { noremap = true })

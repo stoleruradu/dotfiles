@@ -1,15 +1,15 @@
 -- auto install packer if not installed
 local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  local fn = vim.fn
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-        vim.cmd([[packadd packer.nvim]])
-        return true
-    end
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
 
-    return false
+  return false
 end
 
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
@@ -27,81 +27,101 @@ vim.cmd([[
 local status, packer = pcall(require, 'packer')
 
 if not status then
-    return
+  return
 end
 
 return packer.startup(function(use)
-    -- Install your plugins here
-    use { 'wbthomason/packer.nvim' } -- packer can manage itself
+  -- Install your plugins here
+  use { 'wbthomason/packer.nvim' } -- packer can manage itself
 
-    use 'morhetz/gruvbox'
+  use 'morhetz/gruvbox'
 
-    use 'mbbill/undotree'
+  use 'mbbill/undotree'
 
-    use 'junegunn/gv.vim'
+  use 'junegunn/gv.vim'
 
-    use 'nvim-lua/plenary.nvim'
+  use 'nvim-lua/plenary.nvim'
 
-    use 'kyazdani42/nvim-web-devicons'
+  use 'kyazdani42/nvim-web-devicons'
 
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icons
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
-    use 'godlygeek/tabular'
+  use 'godlygeek/tabular'
 
-    use 'hrsh7th/nvim-compe'
+  use({
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-cmdline', -- command line
+      'hrsh7th/cmp-buffer', -- buffer completions
+      'hrsh7th/cmp-nvim-lua', -- nvim config completions
+      'hrsh7th/cmp-nvim-lsp', -- lsp completions
+      'hrsh7th/cmp-path', -- file path completions
+      'saadparwaiz1/cmp_luasnip', -- snippets completions
+      'onsails/lspkind-nvim', -- vscode like icons
+    },
+  })
 
-    use 'hoob3rt/lualine.nvim'
+  -- Snippets
+  use({
+    'L3MON4D3/LuaSnip',
+    requires = {
+      'rafamadriz/friendly-snippets',
+    },
+  })
 
-    use 'glepnir/dashboard-nvim'
 
-    -- LSP
-    use 'neovim/nvim-lspconfig' -- enable LSP
+  use 'hoob3rt/lualine.nvim'
 
-    -- Telescope
-    use 'nvim-telescope/telescope.nvim'
+  use 'glepnir/dashboard-nvim'
 
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  -- LSP
+  use 'neovim/nvim-lspconfig' -- enable LSP
 
-    -- Treesitter
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-    }
+  -- Telescope
+  use 'nvim-telescope/telescope.nvim'
 
-    -- Git
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim'
-        },
-        config = function()
-        end,
-    }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-    use { 'tpope/vim-fugitive' }
+  -- Treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+  }
 
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-    -- use 'airblade/vim-gitgutter'
-    use 'lukas-reineke/indent-blankline.nvim'
+  -- Git
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+    end,
+  }
 
-    use 'karb94/neoscroll.nvim'
+  use { 'tpope/vim-fugitive' }
 
-    use({
-        'glepnir/lspsaga.nvim',
-        branch = 'main'
-    })
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  -- use 'airblade/vim-gitgutter'
+  use 'lukas-reineke/indent-blankline.nvim'
 
-    use { 'williamboman/mason.nvim' }
+  use 'karb94/neoscroll.nvim'
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        packer.sync()
-    end
+  use({
+    'glepnir/lspsaga.nvim',
+    branch = 'main'
+  })
+
+  use { 'williamboman/mason.nvim' }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    packer.sync()
+  end
 end)

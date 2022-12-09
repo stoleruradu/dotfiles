@@ -5,4 +5,3 @@ require('radus.keymaps')
 
 require('radus.plugins')
 require('radus.lsp')
-

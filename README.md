@@ -17,7 +17,5 @@ brew install --cask font-hack-nerd-font
 ```
 
 # TODO
-* migrate to cmp from compe
-* use null-ls for lua formating
 * add TODO plugin
 * configure mason

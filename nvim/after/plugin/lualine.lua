@@ -2,6 +2,11 @@ local status, lualine = pcall(require, 'lualine')
 
 if (not status) then return end
 
+-- local function hello(args, ...)
+--   print(vim.inspect(args, arg))
+--   return [[hello world]]
+-- end
+
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -24,7 +29,7 @@ lualine.setup {
     lualine_z = { 'location' }
   },
   inactive_sections = {
-    lualine_a = {},
+    -- lualine_a = { hello },
     lualine_b = {},
     lualine_c = { 'filename' },
     lualine_x = { 'location' },
