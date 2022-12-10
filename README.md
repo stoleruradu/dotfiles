@@ -18,4 +18,3 @@ brew install --cask font-hack-nerd-font
 
 # TODO
 * add TODO plugin
-* configure mason
