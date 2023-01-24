@@ -9,8 +9,7 @@ window:
     x: 5
     y: 5
   dynamic_padding: true
-  # - buttonless
-  decorations: none
+  decorations: buttonless
   startup_mode: Windowed
 
 alt_send_esc: false
@@ -447,8 +446,7 @@ cursor:
   unfocused_hollow: true
 
 key_bindings:
-    - { key: N, mods: Control, action: SpawnNewInstance }
+    - { key: N, mods: Command, action: SpawnNewInstance }
     - { key: F, mods: Command, chars: "\x1b[C" }
     - { key: B, mods: Command, chars: "\x1b[D" }
-    # - { key: §, chars: "\x60" }
     - { key: O, mods: Command, action: ToggleSimpleFullscreen }

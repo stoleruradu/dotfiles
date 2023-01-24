@@ -60,3 +60,10 @@ vim.keymap.set('n', '<leader>tp', function()
   vim.api.nvim_command(': vsplit | :buffer ' .. terminal)
 end)
 vim.api.nvim_set_keymap('n', '<leader>wq', '<C-W>q', { noremap = true })
+
+vim.cmd([[ 
+  augroup readonly
+      autocmd!
+      autocmd! BufReadPost **/node_modules/** setlocal readonly
+  augroup END
+]])

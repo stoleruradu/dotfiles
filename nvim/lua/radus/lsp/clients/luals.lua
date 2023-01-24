@@ -28,6 +28,7 @@ M.setup = function(on_attach)
             indent_style = 'space', -- ignored and used from editor settings
             indent_size = '2', -- ignored and used from editor settings
             quote_style = 'single',
+            continuous_assign_statement_align_to_equal_sign = false,
           }
         },
         runtime = {
