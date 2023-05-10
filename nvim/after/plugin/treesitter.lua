@@ -18,6 +18,8 @@ require 'nvim-treesitter.configs'.setup {
     'javascript',
     'go',
     'graphql',
+    'markdown_inline',
+    'c_sharp',
   },
 }
 

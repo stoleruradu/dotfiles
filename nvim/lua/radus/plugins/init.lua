@@ -6,5 +6,5 @@ require('neogit').setup({
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'sumneko_lua', 'tsserver', 'eslint', 'jsonls' }
+  ensure_installed = { 'tsserver', 'eslint', 'jsonls', 'omnisharp', 'lua_ls' }
 })

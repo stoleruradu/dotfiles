@@ -106,6 +106,8 @@ return packer.startup(function(use)
 
   use { 'tpope/vim-fugitive' }
 
+  use { 'Hoffs/omnisharp-extended-lsp.nvim' }
+
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   -- use 'airblade/vim-gitgutter'
   use 'lukas-reineke/indent-blankline.nvim'

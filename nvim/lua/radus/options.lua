@@ -54,5 +54,6 @@ if exists('&termguicolors') and exists('&winblend') then
   opt.wildoptions = 'pum'
   opt.pumblend = 5
   opt.background = 'dark'
+  vim.g.gruvbox_contrast_dark = 'hard' -- options: soft, medium, hard
   cmd 'colorscheme gruvbox'
 end

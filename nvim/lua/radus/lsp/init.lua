@@ -138,5 +138,7 @@ require('radus.lsp.clients.eslint')
 require('radus.lsp.clients.json')
 require('radus.lsp.clients.luals').setup(on_attach)
 require('radus.lsp.clients.ts').setup(on_attach)
+require('radus.lsp.clients.omnisharp').setup(on_attach)
+-- require('radus.lsp.clients.charpls').setup(on_attach)
 
 return nvim_lsp

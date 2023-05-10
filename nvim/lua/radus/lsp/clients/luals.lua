@@ -7,11 +7,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 M.setup = function(on_attach)
-  -- By default, lua-language-server doesn't have a cmd set. This is because nvim-lspconfig does not
-  -- make assumptions about your path. You must add the following to your init.vim or init.lua to set
-  -- cmd to the absolute path ($HOME and ~ are not expanded) of your unzipped and compiled lua-language-server.
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
-  nvim_lsp.sumneko_lua.setup({
+  nvim_lsp.lua_ls.setup({
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = true
       client.server_capabilities.documentRangeFormattingProvider = true
@@ -22,14 +18,6 @@ M.setup = function(on_attach)
       Lua = {
         format = {
           enable = true,
-          -- Put format options here
-          -- NOTE: the value should be STRING!!
-          defaultConfig = {
-            indent_style = 'space', -- ignored and used from editor settings
-            indent_size = '2', -- ignored and used from editor settings
-            quote_style = 'single',
-            continuous_assign_statement_align_to_equal_sign = false,
-          }
         },
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
