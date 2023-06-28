@@ -10,8 +10,8 @@ vim.api.nvim_set_keymap('n', '<leader>j', '<C-W>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>k', '<C-W>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>l', '<C-W>l', { noremap = true })
 
---vim.api.nvim_set_keymap('n', '<leader>o', 'o<esc>', { noremap = true })
---vim.api.nvim_set_keymap('n', '<leader>O', 'O<esc>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>o', 'o<esc>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>O', 'O<esc>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true })
