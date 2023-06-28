@@ -1,7 +1,5 @@
-require('radus.options')
-require('radus.globals')
-require('radus.windows')
-require('radus.keymaps')
-
-require('radus.plugins')
-require('radus.lsp')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require('config.lazy')

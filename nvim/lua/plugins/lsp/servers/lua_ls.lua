@@ -6,7 +6,7 @@ local M = {}
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-M.setup = function(on_attach)
+M.init = function(on_attach)
   nvim_lsp.lua_ls.setup({
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = true

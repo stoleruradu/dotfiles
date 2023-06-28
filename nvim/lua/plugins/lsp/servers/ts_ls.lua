@@ -4,7 +4,7 @@ local buf_map = vim.api.nvim_buf_set_keymap
 
 local M = {}
 
-M.setup = function(on_attach)
+M.init = function(on_attach)
   nvim_lsp.tsserver.setup {
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
@@ -21,7 +21,7 @@ M.setup = function(on_attach)
         vim.lsp.buf.execute_command(params)
       end, {})
 
-      buf_map(bufnr, 'n', 'go', ':LspOrganize<cr>', { silent = true })
+      buf_map(bufnr, 'n', '<leader>fo', ':LspOrganize<cr>', { silent = true })
     end,
     filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript' },
     root_dir = util.root_pattern('tsconfig.json', '.git')

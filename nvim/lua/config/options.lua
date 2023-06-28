@@ -2,6 +2,13 @@ local opt = vim.opt
 local exists = vim.fn.exists
 local cmd = vim.cmd
 
+vim.g.mapleader = ' '
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
 -- cmd 'hi normal guibg=000000'
@@ -54,6 +61,4 @@ if exists('&termguicolors') and exists('&winblend') then
   opt.wildoptions = 'pum'
   opt.pumblend = 5
   opt.background = 'dark'
-  vim.g.gruvbox_contrast_dark = 'hard' -- options: soft, medium, hard
-  cmd 'colorscheme gruvbox'
 end

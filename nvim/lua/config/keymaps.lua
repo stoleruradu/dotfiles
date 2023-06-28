@@ -10,8 +10,8 @@ vim.api.nvim_set_keymap('n', '<leader>j', '<C-W>j', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>k', '<C-W>k', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>l', '<C-W>l', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<leader>o', 'o<esc>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>O', 'O<esc>', { noremap = true })
+--vim.api.nvim_set_keymap('n', '<leader>o', 'o<esc>', { noremap = true })
+--vim.api.nvim_set_keymap('n', '<leader>O', 'O<esc>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true })
@@ -37,8 +37,9 @@ vim.api.nvim_set_keymap('n', '<leader>tt', ':vsplit | :terminal<cr>', { noremap 
 vim.api.nvim_set_keymap('n', '<leader>=', ':vertical resize +5<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<cr>', { noremap = true, silent = true })
 
--- vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
--- vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<C-s>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<C-s>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>', { noremap = true })
