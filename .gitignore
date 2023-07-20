@@ -7,3 +7,4 @@ nvim-back/
 vifm/
 **/packer_compiled.lua
 yarn/
+package.json

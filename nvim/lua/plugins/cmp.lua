@@ -3,13 +3,13 @@ return {
   version = false, -- last release is way too old
   event = 'VimEnter',
   dependencies = {
-    'hrsh7th/cmp-cmdline', -- command line
-    'hrsh7th/cmp-buffer', -- buffer completions
-    'hrsh7th/cmp-nvim-lua', -- nvim config completions
-    'hrsh7th/cmp-nvim-lsp', -- lsp completions
-    'hrsh7th/cmp-path', -- file path completions
+    'hrsh7th/cmp-cmdline',      -- command line
+    'hrsh7th/cmp-buffer',       -- buffer completions
+    'hrsh7th/cmp-nvim-lua',     -- nvim config completions
+    'hrsh7th/cmp-nvim-lsp',     -- lsp completions
+    'hrsh7th/cmp-path',         -- file path completions
     'saadparwaiz1/cmp_luasnip', -- snippets completions
-    'onsails/lspkind-nvim', -- vscode like icons
+    'onsails/lspkind-nvim',     -- vscode like icons
     {
       'L3MON4D3/LuaSnip',
       dependencies = {
@@ -56,28 +56,47 @@ return {
         ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ['<S-CR>'] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expandable() then
-            luasnip.expand()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
+        ['<Tab>'] = cmp.mapping({
+          c = function()
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            else
+              cmp.complete()
+            end
+          end,
+          i = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end,
+          s = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
           end
-        end, {
-          'i',
-          's',
         }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -96,7 +115,7 @@ return {
         fields = { 'kind', 'abbr', 'menu' },
         format = lspkind.cmp_format({
           mode = 'symbol', -- show only symbol annotations
-          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 
           -- The function below will be called before any actual modifications from lspkind
           -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))

@@ -69,7 +69,7 @@ return {
           cmp = true,
           gitsigns = true,
           nvimtree = true,
-          telescope = true,
+          -- telescope = true,
           -- lualine = true,
         },
         color_overrides = {

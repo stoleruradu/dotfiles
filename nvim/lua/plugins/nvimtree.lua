@@ -11,7 +11,7 @@ return {
 
       api.config.mappings.default_on_attach(bufnr)
 
-      vim.keymap.set('n', 's', api.node.open.edit, opts('Open'));
+      vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical Split'));
     end,
     view = {
       side = 'left',

@@ -2,7 +2,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = { 'mason.nvim' },
     config = function()
       local protocol = require 'vim.lsp.protocol'
 
@@ -123,16 +122,24 @@ return {
       -- icon
       vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = true,
-        virtual_text = false,
-        severity_sort = true,
-        --virtual_text = {
-        --  spacing = 4,
-        --  prefix = '»'
-        --}
-      }
+          underline = true,
+          virtual_text = false,
+          severity_sort = true,
+          --virtual_text = {
+          --  spacing = 4,
+          --  prefix = '»'
+          --}
+        }
       )
 
+      --   added = " ",
+      -- modified = " ",
+      -- removed = " ",
+      --  saga.init_lsp_saga {
+      -- error_sign = '', -- 
+      --  let g:airline_left_sep = '▶'
+      --  \ 'separator': { 'left': '', 'right': '' },
+      --  prefix = '●', -- Could be '■', '▎', 'x'
       local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 
       for type, icon in pairs(signs) do
@@ -152,27 +159,14 @@ return {
     'williamboman/mason.nvim',
     cmd = 'Mason',
     build = ':MasonUpdate',
-    opts = {
-      ensure_installed = { 'json-lsp', 'eslint-lsp', 'lua-language-server', 'omnisharp', 'typescript-language-server' }
-    },
-    config = function(_, opts)
-      require('mason').setup(opts)
-      local mr = require('mason-registry')
-
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
-    end,
+    opts = {},
   },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    opts = {
+      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls' }
+    },
+    dependencies = { 'williamboman/mason.nvim' }
+  },
+
 }
