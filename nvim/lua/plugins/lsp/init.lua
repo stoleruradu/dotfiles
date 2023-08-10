@@ -1,4 +1,5 @@
 return {
+  { dir = '/Users/radustoleru/Projects/stoleruradu/nodejstools.nvim', opts = {} },
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -59,7 +60,7 @@ return {
         buf_map(bufnr, 'n', '<leader>fp', ':Format<cr>', { silent = true }) -- format pretty
         buf_map(bufnr, 'n', 'gd', ':LspDef<cr>', { silent = true })
         buf_map(bufnr, 'n', 'gR', ':Lspsaga rename<cr>', { silent = true })
-        buf_map(bufnr, 'n', 'gr', ':Lspsaga lsp_finder<cr>', { silent = true })
+        buf_map(bufnr, 'n', 'gr', ':Lspsaga finder<cr>', { silent = true })
         buf_map(bufnr, 'n', 'gy', ':LspTypeDef<cr>', { silent = true })
         buf_map(bufnr, 'n', 'K', ':Lspsaga hover_doc<cr>', { silent = true })
         buf_map(bufnr, 'n', '[a', ':LspDiagPrev<cr>', { silent = true })

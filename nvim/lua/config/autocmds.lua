@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
     vim.highlight.on_yank()
     vim.fn.setreg('+', yanked);
   end,
-})
+});
 
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('close_with_q'),
