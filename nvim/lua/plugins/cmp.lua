@@ -43,9 +43,6 @@ return {
         documentation = cmp.config.window.bordered(),
         completion = cmp.config.window.bordered(),
       },
-      completion = {
-        completeopt = 'menu,menuone,noinsert',
-      },
       snippet = {
         expand = function(args)
           require('luasnip').lsp_expand(args.body)
@@ -56,21 +53,22 @@ return {
         ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = {
+          i = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+            else
+              fallback()
+            end
+          end,
+          s = cmp.mapping.confirm({ select = true }),
+        }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ['<S-CR>'] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ['<Tab>'] = cmp.mapping({
-          c = function()
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            else
-              cmp.complete()
-            end
-          end,
           i = function(fallback)
             if cmp.visible() then
               cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })

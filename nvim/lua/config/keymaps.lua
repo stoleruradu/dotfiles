@@ -45,8 +45,15 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<C-a>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<C-s>', '<C-c>:w<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'gb', '<cmd>BufferLinePick<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>wq', '<C-W>q', { noremap = true })
+
+for i = 1, 9, 1 do
+  vim.keymap.set('n', '<leader>' .. i, function()
+    vim.cmd('exe ' .. i .. ' .. "wincmd w"');
+  end, { silent = true })
+end
