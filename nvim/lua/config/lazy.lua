@@ -24,6 +24,7 @@ require('lazy').setup({
   },
   install = { colorscheme = { 'tokyonight', 'habamax' } },
   checker = { enabled = true }, -- automatically check for plugin updates
+  change_detection = { enabled = false },
   ui = {
     custom_keys = {
       ['<locallead>gg'] = false,

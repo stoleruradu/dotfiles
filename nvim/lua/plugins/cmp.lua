@@ -29,6 +29,34 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
+    require('luasnip.loaders.from_vscode').lazy_load();
+
+    luasnip.add_snippets('typescript', {
+      luasnip.snippet({ trig = 'async', dscr = 'Async arrow function' }, {
+        luasnip.text_node('async ('),
+        luasnip.insert_node(1),
+        luasnip.text_node({ ') => {', '\t' }),
+        luasnip.insert_node(2),
+        luasnip.text_node({ '', '}' }),
+      }),
+      luasnip.snippet({ trig = 'const', name = 'some name', dscr = 'Const async arrow function' }, {
+        luasnip.text_node('const '),
+        luasnip.insert_node(1),
+        luasnip.text_node(' = async ('),
+        luasnip.insert_node(2),
+        luasnip.text_node({ ') => {', '\t' }),
+        luasnip.insert_node(3),
+        luasnip.text_node({ '', '}' }),
+      }),
+      luasnip.snippet({ trig = '()', dscr = 'Arrow function' }, {
+        luasnip.text_node('('),
+        luasnip.insert_node(1),
+        luasnip.text_node({ ') => {', '\t' }),
+        luasnip.insert_node(2),
+        luasnip.text_node({ '', '}' }),
+      })
+    });
+
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
@@ -45,7 +73,7 @@ return {
       },
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
