@@ -151,9 +151,10 @@ return {
 
       require('plugins.lsp.servers.lua_ls').init(on_attach);
       require('plugins.lsp.servers.ts_ls').init(on_attach);
-      require('plugins.lsp.servers.eslint_ls')
-      require('plugins.lsp.servers.json_ls')
-      require('plugins.lsp.servers.charp_ls').init(on_attach)
+      require('plugins.lsp.servers.eslint_ls');
+      require('plugins.lsp.servers.json_ls');
+      require('plugins.lsp.servers.charp_ls').init(on_attach);
+      require('plugins.lsp.servers.go_ls').init(on_attach);
     end,
   },
   {
@@ -165,7 +166,7 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     opts = {
-      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls' }
+      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls', 'gopls' }
     },
     dependencies = { 'williamboman/mason.nvim' }
   },
