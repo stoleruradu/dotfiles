@@ -77,6 +77,7 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
+        ['<C-y>'] = cmp.mapping.complete({ select = false }),
         ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
