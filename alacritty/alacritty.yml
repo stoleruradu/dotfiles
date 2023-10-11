@@ -16,7 +16,7 @@ window:
   # - none: neither borders nor title bar
   # - transparent: title bar, transparent background and title bar buttons
   # - buttonless: title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
   startup_mode: Windowed
 
 alt_send_esc: false
@@ -456,4 +456,3 @@ key_bindings:
     - { key: N, mods: Command, action: SpawnNewInstance }
     - { key: F, mods: Command, chars: "\x1b[C" }
     - { key: B, mods: Command, chars: "\x1b[D" }
-    - { key: O, mods: Command, action: ToggleSimpleFullscreen }

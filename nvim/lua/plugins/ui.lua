@@ -2,10 +2,8 @@ return {
   { 'godlygeek/tabular' },
   {
     'lukas-reineke/indent-blankline.nvim',
-    opts = {
-      show_current_context = false,
-      show_current_context_start = false,
-    }
+    main = 'ibl',
+    opts = { scope = { enabled = false, show_start = false, show_end = false } },
   },
   { 'karb94/neoscroll.nvim', opts = {} },
   {

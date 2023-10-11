@@ -63,8 +63,15 @@ return {
         buf_map(bufnr, 'n', 'gr', ':Lspsaga finder<cr>', { silent = true })
         buf_map(bufnr, 'n', 'gy', ':LspTypeDef<cr>', { silent = true })
         buf_map(bufnr, 'n', 'K', ':Lspsaga hover_doc<cr>', { silent = true })
-        buf_map(bufnr, 'n', '[a', ':LspDiagPrev<cr>', { silent = true })
-        buf_map(bufnr, 'n', ']a', ':LspDiagNext<cr>', { silent = true })
+
+        vim.keymap.set('n', '[e', function()
+          vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+        end)
+
+        vim.keymap.set('n', ']e', function()
+          vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+        end)
+
         buf_map(bufnr, 'n', 'ga', ':Lspsaga code_action<cr>', { silent = true })
         buf_map(bufnr, 'n', '<Leader><space>', ':Lspsaga show_line_diagnostics<cr>', { silent = true })
         buf_map(bufnr, 'i', '<C-x><C-x>', '<cmd> LspSignatureHelp<cr>', { silent = true })
