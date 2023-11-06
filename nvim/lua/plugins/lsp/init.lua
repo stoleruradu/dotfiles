@@ -148,7 +148,7 @@ return {
       --  let g:airline_left_sep = '▶'
       --  \ 'separator': { 'left': '', 'right': '' },
       --  prefix = '●', -- Could be '■', '▎', 'x'
-      local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+      local signs = { Error = '', Warn = '', Hint = '', Info = '' }
 
       for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
@@ -162,6 +162,7 @@ return {
       require('plugins.lsp.servers.json_ls');
       require('plugins.lsp.servers.charp_ls').init(on_attach);
       require('plugins.lsp.servers.go_ls').init(on_attach);
+      require('plugins.lsp.servers.python_ls').init(on_attach);
     end,
   },
   {
@@ -173,7 +174,7 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     opts = {
-      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls', 'gopls' }
+      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls', 'gopls', 'pyright' }
     },
     dependencies = { 'williamboman/mason.nvim' }
   },

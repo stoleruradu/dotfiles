@@ -1,5 +1,3 @@
-local load_textobjects = false
-
 return {
   'nvim-treesitter/nvim-treesitter',
   version = false, -- last release is way too old and doesn't work on Windows
@@ -43,6 +41,7 @@ return {
       'vim',
       'vimdoc',
       'yaml',
+      'c_sharp',
     },
     incremental_selection = {
       enable = true,

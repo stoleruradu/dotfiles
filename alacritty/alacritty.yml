@@ -388,18 +388,18 @@ colors: *GruvboxDark
 # Font Customization
 font:
   normal:
-    family: Hack Nerd Font
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: Medium
   bold:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: Hack Nerd Font
-    style: Italic
-  size: 13
+    family: JetBrainsMono Nerd Font
+    style: Medium Italic
+  size: 14
   offset:
-    x: 1
-    y: 1
+    x: 0
+    y: 0
   glyph_offset:
     x: 0
     y: 0
@@ -453,6 +453,6 @@ cursor:
   unfocused_hollow: true
 
 key_bindings:
-    - { key: N, mods: Command, action: SpawnNewInstance }
+    - { key: T, mods: Command, action: SpawnNewInstance }
     - { key: F, mods: Command, chars: "\x1b[C" }
     - { key: B, mods: Command, chars: "\x1b[D" }

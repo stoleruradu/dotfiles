@@ -16,8 +16,8 @@ return {
       options = {
         icons_enabled = true,
         theme = theme,
-        section_separators = { '', '' },
-        component_separators = { '', '' },
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
         disabled_filetypes = {}
       },
       sections = {
@@ -28,14 +28,14 @@ return {
           {
             'diagnostics',
             sources = { 'nvim_diagnostic' },
+            sections = { 'error', 'warn', 'info', 'hint' },
             symbols = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = ' '
+              error = '  ',
+              warn = '  ',
+              info = '  ',
+              hint = '  '
             }
           },
-          'encoding',
           'filetype'
         },
         lualine_y = { 'progress' },
