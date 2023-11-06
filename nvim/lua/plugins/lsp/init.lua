@@ -1,168 +1,180 @@
+local config = vim.fn.stdpath('config');
+local servers_path = config .. '/lua/plugins/lsp/servers';
+
+
+-- TODO: move this to utils
+local ls = function(path)
+  local handle = vim.loop.fs_scandir(path)
+  local files = {};
+
+  while handle do
+    local name, type = vim.loop.fs_scandir_next(handle)
+
+    if not name then
+      break
+    end
+
+    local fname = path .. '/' .. name;
+
+    table.insert(files, {
+      fname = fname,
+      name = name,
+      type = type,
+    })
+  end
+
+  return files;
+end
+
+local servers = ls(servers_path);
+local ensure_installed = {};
+
+for _, file in ipairs(servers) do
+  if file.name:sub(-4) == '.lua' then
+    table.insert(ensure_installed, file.name:sub(1, -5));
+  end
+end
+
+
+local setup_apearence = function()
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      underline = true,
+      virtual_text = false,
+      severity_sort = true,
+    }
+  )
+
+  local signs = { Error = '', Warn = '', Hint = '', Info = '' }
+
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+end
+
+local setup_commands = function()
+  vim.api.nvim_create_user_command('Format', function()
+    vim.lsp.buf.format({ async = true })
+  end, {})
+
+  vim.api.nvim_create_user_command('LspDefinition', function()
+    vim.lsp.buf.definition()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspCodeAction', function()
+    vim.lsp.buf.code_action()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspHover', function()
+    vim.lsp.buf.hover()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspRename', function()
+    vim.lsp.buf.rename()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspRefs', function()
+    vim.api.nvim_command('Telescope lsp_references')
+  end, {})
+
+  vim.api.nvim_create_user_command('LspTypeDef', function()
+    vim.lsp.buf.type_definition()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspImplementation', function()
+    vim.lsp.buf.implementation()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspDiagPrev', function()
+    vim.lsp.diagnostic.goto_prev()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspDiagNext', function()
+    vim.lsp.diagnostic.goto_next()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspDiagLine', function()
+    vim.diagnostic.open_float()
+  end, {})
+
+  vim.api.nvim_create_user_command('LspSignatureHelp', function()
+    vim.lsp.buf.signature_help()
+  end, {})
+end
+
+local setup_keymaps = function(buffer)
+  vim.keymap.set('n', '<leader>fp', ':Format<cr>', { buffer = buffer, silent = true }) -- format pretty
+  vim.keymap.set('n', 'gd', ':LspDef<cr>', { buffer = buffer, silent = true })
+  vim.keymap.set('n', 'gR', ':Lspsaga rename<cr>', { buffer = buffer, silent = true })
+  vim.keymap.set('n', 'gr', ':Lspsaga finder<cr>', { buffer = buffer, silent = true })
+  vim.keymap.set('n', 'gy', ':LspTypeDef<cr>', { buffer = buffer, silent = true })
+  vim.keymap.set('n', 'K', ':Lspsaga hover_doc<cr>', { buffer = buffer, silent = true })
+
+  vim.keymap.set('n', '[e', function()
+    vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  end)
+
+  vim.keymap.set('n', ']e', function()
+    vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+  end)
+
+  vim.keymap.set('n', 'ga', ':Lspsaga code_action<cr>', { buffer = buffer, silent = true })
+  vim.keymap.set('n', '<Leader><space>', ':Lspsaga show_line_diagnostics<cr>',
+    { buffer = buffer, silent = true })
+  vim.keymap.set('i', '<C-x><C-x>', '<cmd> LspSignatureHelp<cr>', { buffer = buffer, silent = true })
+end
+
+local setup_formating = function(buffer, client)
+  if client.server_capabilities.documentFormattingProvider then
+    return;
+  end
+
+  local group = vim.api.nvim_create_augroup('Format' .. tostring(buffer), {})
+
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    group = group,
+    buffer = buffer,
+    callback = function()
+      vim.lsp.buf.format()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('BufDelete', {
+    buffer = buffer,
+    callback = function(opt)
+      pcall(vim.api.nvim_del_augroup_by_id, opt.buf)
+    end,
+  })
+end
+
 return {
   { dir = '/Users/radustoleru/Projects/stoleruradu/nodejstools.nvim', opts = {} },
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-      local protocol = require 'vim.lsp.protocol'
+      local nvim_lsp = require 'lspconfig'
 
-      local on_attach = function(client, bufnr, auto_format)
-        local buf_map = vim.api.nvim_buf_set_keymap
+      setup_apearence();
+      setup_commands();
 
-        vim.api.nvim_create_user_command('Format', function()
-          vim.lsp.buf.format({ async = true })
-        end, {})
+      for _, server in ipairs(ensure_installed) do
+        local import = 'plugins.lsp.servers' .. '.' .. server;
+        local ok, opts = pcall(require, import)
 
-        vim.api.nvim_create_user_command('LspDefinition', function()
-          vim.lsp.buf.definition()
-        end, {})
+        if ok and nvim_lsp[server] and nvim_lsp[server].setup then
+          local setup_defaults = opts.on_attach or function() end;
 
-        vim.api.nvim_create_user_command('LspCodeAction', function()
-          vim.lsp.buf.code_action()
-        end, {})
+          opts.on_attach = function(client, buffer)
+            setup_defaults(client, buffer);
+            setup_keymaps(buffer);
+            setup_formating(buffer, client);
+          end
 
-        vim.api.nvim_create_user_command('LspHover', function()
-          vim.lsp.buf.hover()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspRename', function()
-          vim.lsp.buf.rename()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspRefs', function()
-          vim.api.nvim_command('Telescope lsp_references')
-        end, {})
-
-        vim.api.nvim_create_user_command('LspTypeDef', function()
-          vim.lsp.buf.type_definition()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspImplementation', function()
-          vim.lsp.buf.implementation()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspDiagPrev', function()
-          vim.lsp.diagnostic.goto_prev()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspDiagNext', function()
-          vim.lsp.diagnostic.goto_next()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspDiagLine', function()
-          vim.diagnostic.open_float()
-        end, {})
-
-        vim.api.nvim_create_user_command('LspSignatureHelp', function()
-          vim.lsp.buf.signature_help()
-        end, {})
-
-        buf_map(bufnr, 'n', '<leader>fp', ':Format<cr>', { silent = true }) -- format pretty
-        buf_map(bufnr, 'n', 'gd', ':LspDef<cr>', { silent = true })
-        buf_map(bufnr, 'n', 'gR', ':Lspsaga rename<cr>', { silent = true })
-        buf_map(bufnr, 'n', 'gr', ':Lspsaga finder<cr>', { silent = true })
-        buf_map(bufnr, 'n', 'gy', ':LspTypeDef<cr>', { silent = true })
-        buf_map(bufnr, 'n', 'K', ':Lspsaga hover_doc<cr>', { silent = true })
-
-        vim.keymap.set('n', '[e', function()
-          vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
-        end)
-
-        vim.keymap.set('n', ']e', function()
-          vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-        end)
-
-        buf_map(bufnr, 'n', 'ga', ':Lspsaga code_action<cr>', { silent = true })
-        buf_map(bufnr, 'n', '<Leader><space>', ':Lspsaga show_line_diagnostics<cr>', { silent = true })
-        buf_map(bufnr, 'i', '<C-x><C-x>', '<cmd> LspSignatureHelp<cr>', { silent = true })
-
-        if client.server_capabilities.documentFormattingProvider and auto_format then
-          local group = vim.api.nvim_create_augroup('Format' .. tostring(bufnr), {})
-
-          vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-            group = group,
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format()
-            end,
-          })
-
-          vim.api.nvim_create_autocmd('BufDelete', {
-            buffer = bufnr,
-            callback = function(opt)
-              pcall(vim.api.nvim_del_augroup_by_id, opt.buf)
-              -- if buf_auid[opt.buf] then
-              --   rawset(buf_auid, opt.buf, nil)
-              -- end
-            end,
-          })
+          nvim_lsp[server].setup(opts);
         end
-
-        protocol.CompletionItemKind = {
-          '', -- Text
-          '', -- Method
-          '', -- Function
-          '', -- Constructor
-          '', -- Field
-          '', -- Variable
-          '', -- Class
-          'ﰮ', -- Interface
-          '', -- Module
-          '', -- Property
-          '', -- Unit
-          '', -- Value
-          '', -- Enum
-          '', -- Keyword
-          '﬌', -- Snippet
-          '', -- Color
-          '', -- File
-          '', -- Reference
-          '', -- Folder
-          '', -- EnumMember
-          '', -- Constant
-          '', -- Struct
-          '', -- Event
-          'ﬦ', -- Operator
-          '', -- TypeParameter
-        }
       end
-
-      -- icon
-      vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          underline = true,
-          virtual_text = false,
-          severity_sort = true,
-          --virtual_text = {
-          --  spacing = 4,
-          --  prefix = '»'
-          --}
-        }
-      )
-
-      --   added = " ",
-      -- modified = " ",
-      -- removed = " ",
-      --  saga.init_lsp_saga {
-      -- error_sign = '', -- 
-      --  let g:airline_left_sep = '▶'
-      --  \ 'separator': { 'left': '', 'right': '' },
-      --  prefix = '●', -- Could be '■', '▎', 'x'
-      local signs = { Error = '', Warn = '', Hint = '', Info = '' }
-
-      for type, icon in pairs(signs) do
-        local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-
-
-      require('plugins.lsp.servers.lua_ls').init(on_attach);
-      require('plugins.lsp.servers.ts_ls').init(on_attach);
-      require('plugins.lsp.servers.eslint_ls');
-      require('plugins.lsp.servers.json_ls');
-      require('plugins.lsp.servers.charp_ls').init(on_attach);
-      require('plugins.lsp.servers.go_ls').init(on_attach);
-      require('plugins.lsp.servers.python_ls').init(on_attach);
     end,
   },
   {
@@ -174,7 +186,7 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     opts = {
-      ensure_installed = { 'tsserver', 'eslint', 'omnisharp', 'jsonls', 'lua_ls', 'gopls', 'pyright' }
+      ensure_installed = ensure_installed
     },
     dependencies = { 'williamboman/mason.nvim' }
   },

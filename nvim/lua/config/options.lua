@@ -12,7 +12,6 @@ vim.g.loaded_netrwPlugin = 1
 
 cmd 'syntax on'
 cmd 'filetype indent plugin on'
--- cmd 'hi normal guibg=000000'
 
 opt.path = opt.path + '**';
 opt.re = 0

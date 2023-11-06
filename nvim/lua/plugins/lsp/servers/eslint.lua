@@ -1,6 +1,4 @@
-local nvim_lsp = require 'lspconfig'
-
-nvim_lsp.eslint.setup({
+return {
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
@@ -10,4 +8,4 @@ nvim_lsp.eslint.setup({
   settings = {
     workingDirectory = { mode = 'auto' }
   }
-})
+}
