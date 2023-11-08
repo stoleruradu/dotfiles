@@ -1,7 +1,6 @@
 local config = vim.fn.stdpath('config');
 local servers_path = config .. '/lua/plugins/lsp/servers';
 
-
 -- TODO: move this to utils
 local ls = function(path)
   local handle = vim.loop.fs_scandir(path)
@@ -190,5 +189,4 @@ return {
     },
     dependencies = { 'williamboman/mason.nvim' }
   },
-
 }
