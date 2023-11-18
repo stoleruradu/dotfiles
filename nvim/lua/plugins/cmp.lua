@@ -54,6 +54,13 @@ return {
         luasnip.text_node({ ') => {', '\t' }),
         luasnip.insert_node(2),
         luasnip.text_node({ '', '}' }),
+      }),
+      luasnip.snippet({ trig = 'it', dscr = 'Test case' }, {
+        luasnip.text_node('it(\''),
+        luasnip.insert_node(1),
+        luasnip.text_node({ '\',' }),
+        luasnip.insert_node(2),
+        luasnip.text_node({ ');' }),
       })
     });
 

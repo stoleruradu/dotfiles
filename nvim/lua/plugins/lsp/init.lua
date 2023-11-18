@@ -1,31 +1,8 @@
 local config = vim.fn.stdpath('config');
+local fs = require('lib.fs');
+
 local servers_path = config .. '/lua/plugins/lsp/servers';
-
--- TODO: move this to utils
-local ls = function(path)
-  local handle = vim.loop.fs_scandir(path)
-  local files = {};
-
-  while handle do
-    local name, type = vim.loop.fs_scandir_next(handle)
-
-    if not name then
-      break
-    end
-
-    local fname = path .. '/' .. name;
-
-    table.insert(files, {
-      fname = fname,
-      name = name,
-      type = type,
-    })
-  end
-
-  return files;
-end
-
-local servers = ls(servers_path);
+local servers = fs.ls(servers_path);
 local ensure_installed = {};
 
 for _, file in ipairs(servers) do

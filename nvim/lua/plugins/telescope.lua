@@ -1,9 +1,9 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    commit = vim.fn.has('nvim-0.9.0') == 0 and '057ee0f8783' or nil,
-    cmd = 'Telescope',
+    tag = '0.1.4',
     version = false, -- telescope did only one release, so use HEAD for now
+    dependencies = { 'nvim-lua/plenary.nvim' },
     keys = function()
       vim.api.nvim_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { noremap = true })
       vim.api.nvim_set_keymap('n', '<leader>fm', '<cmd>Telescope keymaps<cr>', { noremap = true })
@@ -25,6 +25,7 @@ return {
     end,
     opts = function()
       local actions = require 'telescope.actions'
+
       return {
         defaults = {
           initial_mode = 'insert',
@@ -59,13 +60,11 @@ return {
     end,
   },
   {
-    'telescope.nvim',
-    dependencies = {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-      config = function()
-        require('telescope').load_extension('fzf')
-      end,
-    },
+    'nvim-telescope/telescope-fzf-native.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    build = 'make',
+    config = function()
+      require('telescope').load_extension('fzf')
+    end,
   },
 }
