@@ -1,4 +1,8 @@
 vim.api.nvim_set_keymap('', 'q', '<nop>', {})
+
+vim.api.nvim_set_keymap('n', '<leader>0', '$', { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>0', '$', { noremap = true })
+
 vim.api.nvim_set_keymap('n', '<S-u>', '<C-r>', { noremap = true })
 
 vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', { noremap = true })
@@ -25,7 +29,6 @@ vim.api.nvim_set_keymap('n', 'd', '"_d', { noremap = true })
 vim.api.nvim_set_keymap('v', 'd', '"_d', { noremap = true })
 vim.api.nvim_set_keymap('x', 'd', '"_d', { noremap = true })
 
-
 vim.api.nvim_set_keymap('x', 'K', ":move '<-2<cr>gv-gv", { noremap = true })
 vim.api.nvim_set_keymap('x', 'J', ":move '>+1<cr>gv-gv", { noremap = true })
 
@@ -45,7 +48,6 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-a>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<C-c>:w<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>,', ':vsplit ~/.config/nvim/init.lua<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', 'gb', '<cmd>BufferLinePick<cr>', { noremap = true })
 

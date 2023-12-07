@@ -48,9 +48,10 @@ vim.api.nvim_create_autocmd({ 'WinClosed' }, {
   end,
 })
 
-vim.keymap.set('n', '<leader>wP', command_hof(), { desc = 'Reopens previous closed terminal window' })
-vim.keymap.set('n', '<leader>wp', command_hof({ vertical = true }),
-  { desc = 'Reopens previous closed window in a vertical split' })
+-- vim.keymap.set('n', '<leader>wP', command_hof(), { desc = 'Reopens previous closed terminal window' })
+--vim.keymap.set('n', '<leader>wp', command_hof({ vertical = true }),
+--  { desc = 'Reopens previous closed window in a vertical split' })
+
 vim.keymap.set('n', '<leader>tp', function()
   local terminal = terminals.pop()
 

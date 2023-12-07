@@ -7,40 +7,6 @@ return {
   },
   { 'karb94/neoscroll.nvim', opts = {} },
   {
-    'akinsho/bufferline.nvim',
-    event = 'VeryLazy',
-    version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    keys = {
-      { 'b1', '<Cmd>BufferLineGoToBuffer 1<CR>',         desc = 'Jump to visible buffer 1' },
-      { 'b2', '<Cmd>BufferLineGoToBuffer 2<CR>',         desc = 'Jump to visible buffer 2' },
-      { 'b3', '<Cmd>BufferLineGoToBuffer 3<CR>',         desc = 'Jump to visible buffer 3' },
-      { 'b4', '<Cmd>BufferLineGoToBuffer 4<CR>',         desc = 'Jump to visible buffer 4' },
-      { 'b5', '<Cmd>BufferLineGoToBuffer 5<CR>',         desc = 'Jump to visible buffer 5' },
-      { 'b6', '<Cmd>BufferLineGoToBuffer 6<CR>',         desc = 'Jump to visible buffer 6' },
-      { 'b7', '<Cmd>BufferLineGoToBuffer 7<CR>',         desc = 'Jump to visible buffer 7' },
-      { 'b8', '<Cmd>BufferLineGoToBuffer 8<CR>',         desc = 'Jump to visible buffer 8' },
-      { 'b9', '<Cmd>BufferLineGoToBuffer 9<CR>',         desc = 'Jump to visible buffer 9' },
-      { 'bp', '<Cmd>BufferLineTogglePin<CR>',            desc = 'Toggle pin' },
-      { 'bo', '<Cmd>BufferLineGroupClose ungrouped<CR>', desc = 'Delete non-pinned buffers' },
-    },
-    opts = {
-      options = {
-        numbers = function(opts)
-          return string.format('%s|', opts.ordinal);
-        end,
-        offsets = {
-          {
-            filetype = 'NvimTree',
-            text = 'File Explorer',
-            text_align = 'left',
-            highlight = 'Directory',
-          }
-        },
-      }
-    }
-  },
-  {
     'glepnir/lspsaga.nvim',
     branch = 'main',
     event = 'LspAttach',

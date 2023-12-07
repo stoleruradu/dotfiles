@@ -61,6 +61,13 @@ return {
         luasnip.text_node({ '\',' }),
         luasnip.insert_node(2),
         luasnip.text_node({ ');' }),
+      }),
+      luasnip.snippet({ trig = 'type', dscr = 'Type definition' }, {
+        luasnip.text_node('type '),
+        luasnip.insert_node(1),
+        luasnip.text_node({ ' = {', '\t' }),
+        luasnip.insert_node(2),
+        luasnip.text_node({ '', '};' }),
       })
     });
 
