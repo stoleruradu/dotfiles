@@ -1,7 +1,7 @@
 local config = vim.fn.stdpath('config');
 local fs = require('lib.fs');
 
-local servers_path = config .. '/lua/plugins/lsp/servers';
+local servers_path = config .. '/lua/plugins/lsp/setups';
 local servers = fs.ls(servers_path);
 local ensure_installed = {};
 
@@ -136,7 +136,7 @@ return {
       setup_commands();
 
       for _, server in ipairs(ensure_installed) do
-        local import = 'plugins.lsp.servers' .. '.' .. server;
+        local import = 'plugins.lsp.setups' .. '.' .. server;
         local ok, opts = pcall(require, import)
 
         if ok and nvim_lsp[server] and nvim_lsp[server].setup then
