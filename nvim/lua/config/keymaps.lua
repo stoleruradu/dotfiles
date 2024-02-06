@@ -53,6 +53,14 @@ vim.api.nvim_set_keymap('n', 'gb', '<cmd>BufferLinePick<cr>', { noremap = true }
 
 vim.api.nvim_set_keymap('n', '<leader>wq', '<C-W>q', { noremap = true })
 
+vim.keymap.set('n', '<leader>ww', function ()
+  vim.cmd('vsplit %')
+end)
+
+vim.keymap.set('n', '<leader>wo', function ()
+  vim.cmd('!open %')
+end)
+
 for i = 1, 9, 1 do
   vim.keymap.set('n', '<leader>' .. i, function()
     vim.cmd('exe ' .. i .. ' .. "wincmd w"');
