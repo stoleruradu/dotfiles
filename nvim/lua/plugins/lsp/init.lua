@@ -125,7 +125,6 @@ local setup_formating = function(buffer, client)
 end
 
 return {
-  { dir = '/Users/radustoleru/Projects/stoleruradu/nodejstools.nvim', opts = {} },
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
