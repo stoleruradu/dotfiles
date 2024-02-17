@@ -10,11 +10,11 @@ return {
       vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>Telescope git_status<cr>', { noremap = true })
 
 
-      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = '[G]it [f]iles' })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind [g]rep' })
+      vim.keymap.set('n', "<leader>'", require('telescope.builtin').git_files, { desc = '[G]it [f]iles' })
+      vim.keymap.set('n', '<leader>.', require('telescope.builtin').live_grep, { desc = '[F]ind [g]rep' })
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [f]iles' })
       vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [b]uffers' })
+      vim.keymap.set('n', '<leader>;', require('telescope.builtin').buffers, { desc = '[F]ind [b]uffers' })
       vim.keymap.set('n', '<leader>/', function()
         require('telescope.builtin').current_buffer_fuzzy_find({
           previewer = false,
@@ -28,6 +28,12 @@ return {
 
       return {
         defaults = {
+          sorting_strategy = 'ascending',
+          layout_config = {
+            prompt_position = 'top',
+            -- width = 0.5,
+            -- height = 0.4,
+          },
           initial_mode = 'insert',
           mappings = {
             i = {
@@ -38,14 +44,12 @@ return {
           },
         },
         pickers = {
+          git_files = {
+            previewer = false,
+          },
           buffers = {
             previewer = false,
             sorting_strategy = 'ascending',
-            layout_config = {
-              prompt_position = 'top',
-              width = 0.5,
-              height = 0.4,
-            },
             mappings = {
               n = {
                 ['<c-x>'] = actions.delete_buffer + actions.move_to_top,
