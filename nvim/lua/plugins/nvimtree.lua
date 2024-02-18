@@ -9,6 +9,8 @@ return {
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
 
+      vim.keymap.set("n", "d", api.fs.remove, opts "Delete")
+      vim.keymap.set("n", "a", api.fs.create, opts "Create")
       vim.keymap.set("n", "y", api.fs.copy.filename, opts "Copy Name")
       vim.keymap.set("n", "r", api.fs.rename, opts "Rename")
       vim.keymap.set("n", "R", api.tree.reload, opts "Refresh")
