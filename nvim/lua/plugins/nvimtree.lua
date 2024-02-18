@@ -9,9 +9,11 @@ return {
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
 
-      api.config.mappings.default_on_attach(bufnr)
-
-      vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical Split'));
+      vim.keymap.set("n", "y", api.fs.copy.filename, opts "Copy Name")
+      vim.keymap.set("n", "r", api.fs.rename, opts "Rename")
+      vim.keymap.set("n", "R", api.tree.reload, opts "Refresh")
+      vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts "Toggle Git Ignore")
+      vim.keymap.set('n', 'o', api.node.open.vertical, opts('Open: Vertical Split'));
     end,
     view = {
       side = 'left',
