@@ -10,4 +10,11 @@ Run stow
 stow --verbose .
 ```
 
+Sync new changes
+
+```bash
+stow --verbose --adopt -R .
+
+```
+
 More infor: `man stow`
