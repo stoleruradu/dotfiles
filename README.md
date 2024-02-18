@@ -1,20 +1,13 @@
-# LSP
-
-## Typescript
-
-### Setup
+# GNU stow
 
 ```bash
-npm i -g diagnostic-languageserver eslint_d typescript typescript-language-server prettier
+brew install stow
 ```
 
-# Installing Nerd Fonts on MacOS
+Run stow
 
-To install with Homebrew, run the following commands:
-```
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
+```bash
+stow --verbose .
 ```
 
-# TODO
-* add TODO plugin
+More infor: `man stow`
