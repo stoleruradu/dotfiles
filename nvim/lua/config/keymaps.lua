@@ -49,12 +49,15 @@ vim.api.nvim_set_keymap('n', '<C-a>', ':source ~/.config/nvim/init.lua<cr>', { n
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<C-c>:w<cr>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', 'gb', '<cmd>BufferLinePick<cr>', { noremap = true })
-
 vim.api.nvim_set_keymap('n', '<leader>wq', '<C-W>q', { noremap = true })
 
+vim.keymap.set('n', '<C-U>', '15<C-U>zz')
+vim.keymap.set('n', '<C-D>', '15<C-D>zz')
+
 vim.keymap.set('n', '<leader>ww', function ()
+  local cords = vim.api.nvim_win_get_cursor(0);
   vim.cmd('vsplit %')
+  vim.api.nvim_win_set_cursor(0, cords);
 end)
 
 vim.keymap.set('n', '<leader>wo', function ()
