@@ -29,21 +29,6 @@ style = "Medium"
 x = 0
 y = 0
 
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "T"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u001B[C"
-key = "F"
-mods = "Command"
-
-[[keyboard.bindings]]
-chars = "\u001B[D"
-key = "B"
-mods = "Command"
-
 [window]
 decorations = "none"
 
