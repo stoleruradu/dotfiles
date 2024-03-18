@@ -8,3 +8,4 @@ vifm/
 **/packer_compiled.lua
 yarn/
 package.json
+lazy-lock.json

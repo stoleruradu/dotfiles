@@ -7,21 +7,14 @@ return {
     keys = function()
       vim.api.nvim_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { noremap = true })
       vim.api.nvim_set_keymap('n', '<leader>fm', '<cmd>Telescope keymaps<cr>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>Telescope git_status<cr>', { noremap = true })
+      vim.keymap.set('n', '<leader>,', '<cmd>Telescope git_status<cr>', { desc = 'Git status' })
 
 
       vim.keymap.set('n', "<leader>'", require('telescope.builtin').git_files, { desc = '[G]it [f]iles' })
-      vim.keymap.set('n', '<leader>.', require('telescope.builtin').live_grep, { desc = '[F]ind [g]rep' })
+      vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = '[F]ind [g]rep' })
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [f]iles' })
       vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
       vim.keymap.set('n', '<leader>;', require('telescope.builtin').buffers, { desc = '[F]ind [b]uffers' })
-      vim.keymap.set('n', '<leader>/', function()
-        require('telescope.builtin').current_buffer_fuzzy_find({
-          previewer = false,
-          sorting_strategy = 'ascending',
-          layout_config = { prompt_position = 'top', width = 0.5, height = 0.4 }
-        });
-      end, { desc = '[/] Fuzzily search in current buffer' })
     end,
     opts = function()
       local actions = require 'telescope.actions'
@@ -34,7 +27,7 @@ return {
             -- width = 0.5,
             -- height = 0.4,
           },
-          initial_mode = 'insert',
+          initial_mode = 'normal',
           mappings = {
             i = {
               ['<C-u>'] = false,
@@ -45,9 +38,11 @@ return {
         },
         pickers = {
           git_files = {
+            initial_mode = 'insert',
             previewer = false,
           },
           buffers = {
+            initial_mode = 'insert',
             previewer = false,
             sorting_strategy = 'ascending',
             mappings = {

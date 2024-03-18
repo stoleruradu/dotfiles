@@ -2,6 +2,8 @@ local opt = vim.opt
 local exists = vim.fn.exists
 local cmd = vim.cmd
 
+local TAB_WIDTH = 4
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.loaded_python3_provider = 0
@@ -23,11 +25,11 @@ opt.encoding = 'utf8'
 -- opt.clipboard = 'unnamedplus'
 
 -- tell vim how many columns a tab counts for
-opt.tabstop = 2
+opt.tabstop = TAB_WIDTH
 -- control how many columns vim uses when you hit Tab in insert mode
-opt.softtabstop = 2
+opt.softtabstop = TAB_WIDTH
 -- to control how many columns text is indented with the reindent operations (<< and >>)
-opt.shiftwidth = 2
+opt.shiftwidth = TAB_WIDTH
 -- hitting Tab in insert mode will produce the appropriate number of spaces
 opt.expandtab = true
 

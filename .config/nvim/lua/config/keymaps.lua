@@ -49,7 +49,7 @@ vim.api.nvim_set_keymap('n', '<C-a>', ':source ~/.config/nvim/init.lua<cr>', { n
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-s>', '<C-c>:w<cr>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<leader>wq', '<C-W>q', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>q', '<C-W>q', { noremap = true })
 
 vim.keymap.set('n', '<C-U>', '15<C-U>zz')
 vim.keymap.set('n', '<C-D>', '15<C-D>zz')
@@ -62,6 +62,10 @@ end)
 
 vim.keymap.set('n', '<leader>wo', function ()
   vim.cmd('!open %')
+end)
+
+vim.keymap.set('n', '<leader>p', function ()
+  vim.cmd(':vsplit | :b#')
 end)
 
 for i = 1, 9, 1 do
