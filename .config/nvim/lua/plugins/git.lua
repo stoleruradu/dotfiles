@@ -1,26 +1,22 @@
-_G.git_push_set_upstream = function()
-  print('Pushing...')
-
-  local branch = vim.fn.FugitiveHead()
-  vim.api.nvim_command(':G push -u origin ' .. branch)
-
-  print('Pushed! 🤩')
-end
-
-_G.git_reset_hard_origin = function()
-  local branch = vim.fn.FugitiveHead()
-
-  vim.api.nvim_command(':G fetch origin')
-  vim.api.nvim_command(':G reset --hard origin/' .. branch)
-end
-
 vim.api.nvim_set_keymap('n', '<leader>ga', ':diffget //2<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gd', ':diffget //3<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gff', ':Gvdiffsplit!<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gs', ':G<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gv', ':GV<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gp', ':lua git_push_set_upstream()<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gbr', ':lua git_reset_hard_origin()<cr>', { noremap = true })
+vim.keymap.set('n', '<leader>gp', function ()
+  print('Pushing...')
+  local branch = vim.fn.FugitiveHead()
+
+  vim.api.nvim_command(':G push -u origin ' .. branch)
+
+  print('Pushed! 🤩')
+end)
+vim.keymap.set('n', '<leader>gbr', function ()
+  local branch = vim.fn.FugitiveHead()
+
+  vim.api.nvim_command(':G fetch origin')
+  vim.api.nvim_command(':G reset --hard origin/' .. branch)
+end)
 
 return {
   { 'junegunn/gv.vim' },
