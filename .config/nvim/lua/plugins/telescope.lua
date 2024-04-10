@@ -6,7 +6,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = function()
       vim.api.nvim_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { noremap = true })
-      vim.api.nvim_set_keymap('n', '<leader>fm', '<cmd>Telescope keymaps<cr>', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>.', '<cmd>Telescope keymaps<cr>', { noremap = true })
       vim.keymap.set('n', '<leader>,', '<cmd>Telescope git_status<cr>', { desc = 'Git status' })
 
 

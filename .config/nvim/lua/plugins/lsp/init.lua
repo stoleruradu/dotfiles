@@ -87,11 +87,11 @@ local setup_keymaps = function(buffer)
   vim.keymap.set('n', 'gy', ':LspTypeDef<cr>', { buffer = buffer, silent = true })
   vim.keymap.set('n', 'K', ':Lspsaga hover_doc<cr>', { buffer = buffer, silent = true })
 
-  vim.keymap.set('n', '[e', function()
+  vim.keymap.set('n', 'gE', function()
     vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
   end)
 
-  vim.keymap.set('n', ']e', function()
+  vim.keymap.set('n', 'ge', function()
     vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
   end)
 
