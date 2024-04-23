@@ -23,9 +23,10 @@ local filename = function(str)
 end
 
 local init_ui = function()
+    local neutral_green = '#98971a';
     local signs = { Start = ' ', Stop = '■ ', }
 
-    vim.cmd 'highlight UnitxSignsGreen guifg=Green'
+    vim.api.nvim_set_hl(0, "UnitxSignsGreen", {fg = neutral_green})
 
     for type, icon in pairs(signs) do
         local hl = signs_group .. type
