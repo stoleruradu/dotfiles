@@ -1,4 +1,4 @@
-local pkg = require('ext.pkgjson')
+local pkg = require('ext.npx')
 local unitx = require('ext.unitx')
 
 pkg.setup();
