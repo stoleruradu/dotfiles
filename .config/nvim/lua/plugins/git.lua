@@ -36,13 +36,13 @@ return {
         end
 
         -- Navigation
-        map('n', ']h', function()
+        map('n', 'gh', function()
           if vim.wo.diff then return ']h' end
           vim.schedule(function() gs.next_hunk() end)
           return '<Ignore>'
         end, { expr = true })
 
-        map('n', '[h', function()
+        map('n', 'gH', function()
           if vim.wo.diff then return '[h' end
           vim.schedule(function() gs.prev_hunk() end)
           return '<Ignore>'

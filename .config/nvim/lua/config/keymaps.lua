@@ -1,4 +1,10 @@
 vim.api.nvim_set_keymap('', 'q', '<nop>', {})
+vim.api.nvim_set_keymap('', 'ge', '<nop>', {})
+vim.api.nvim_set_keymap('', 'gE', '<nop>', {})
+vim.api.nvim_set_keymap('', 'gh', '<nop>', {})
+vim.api.nvim_set_keymap('', 'gH', '<nop>', {})
+
+vim.keymap.set('i', '<C-o>', '<C-c>O')
 
 vim.api.nvim_set_keymap('n', '<leader>0', '$', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>0', '$', { noremap = true })
