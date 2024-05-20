@@ -31,6 +31,7 @@ y = 0
 
 [window]
 decorations = "none"
+dynamic_padding = false
 
 [window.dimensions]
 columns = 0
