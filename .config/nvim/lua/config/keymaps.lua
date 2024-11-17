@@ -39,8 +39,7 @@ vim.api.nvim_set_keymap('x', 'K', ":move '<-2<cr>gv-gv", { noremap = true })
 vim.api.nvim_set_keymap('x', 'J', ":move '>+1<cr>gv-gv", { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeShow<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFindFile<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':Oil<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>ts', ':split | :terminal<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>t', ':vsplit | :terminal<cr>', { noremap = true, silent = true })
