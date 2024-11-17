@@ -1,75 +1,75 @@
 [colors.primary]
-background = '#1E1E2E' # base
-foreground = '#CDD6F4' # text
+background = '#1D2021' # base
+foreground = '#D4BE98' # text
 # Bright and dim foreground colors
-dim_foreground = '#CDD6F4' # text
-bright_foreground = '#CDD6F4' # text
+dim_foreground = '#D4BE98' # text
+bright_foreground = '#D4BE98' # text
 
 # Cursor colors
 [colors.cursor]
-text = '#1E1E2E' # base
-cursor = '#F5E0DC' # rosewater
+text = '#1D2021' # base
+cursor = '#EA6962' # rosewater
 
 [colors.vi_mode_cursor]
-text = '#1E1E2E' # base
-cursor = '#B4BEFE' # lavender
+text = '#1D2021' # base
+cursor = '#7DAEA3' # lavender
 
 # Search colors
 [colors.search.matches]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
+foreground = '#1D2021' # base
+background = '#A69372' # subtext0
 
 [colors.search.focused_match]
-foreground = '#1E1E2E' # base
-background = '#A6E3A1' # green
+foreground = '#1D2021' # base
+background = '#A9B665' # green
 
 [colors.footer_bar]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
+foreground = '#1D2021' # base
+background = '#A69372' # subtext0
 
 # Keyboard regex hints
 [colors.hints.start]
-foreground = '#1E1E2E' # base
+foreground = '#1D2021' # base
 background = '#F9E2AF' # yellow
 
 [colors.hints.end]
-foreground = '#1E1E2E' # base
-background = '#A6ADC8' # subtext0
+foreground = '#1D2021' # base
+background = '#A69372' # subtext0
 
 # Selection colors
 [colors.selection]
-text = '#1E1E2E' # base
-background = '#F5E0DC' # rosewater
+text = '#1D2021' # base
+background = '#EA6962' # rosewater
 
 # Normal colors
 [colors.normal]
-black = '#45475A' # surface1
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#BAC2DE' # subtext1
+black = '#2A2D2E' # surface1
+red = '#EA6962' # red
+green = '#A9B665' # green
+yellow = '#D8A657' # yellow
+blue = '#7DAEA3' # blue
+magenta = '#D3869B' # pink
+cyan = '#89B482' # teal
+white = '#BDAE8B' # subtext1
 
 # Bright colors
 [colors.bright]
-black = '#585B70' # surface2
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#A6ADC8' # subtext0
+black = '#4B4F51' # surface2
+red = '#EA6962' # red
+green = '#A9B665' # green
+yellow = '#D8A657' # yellow
+blue = '#7DAEA3' # blue
+magenta = '#D3869B' # pink
+cyan = '#89B482' # teal
+white = '#A69372' # subtext0
 
 # Dim colors
 [colors.dim]
-black = '#45475A' # surface1
-red = '#F38BA8' # red
-green = '#A6E3A1' # green
-yellow = '#F9E2AF' # yellow
-blue = '#89B4FA' # blue
-magenta = '#F5C2E7' # pink
-cyan = '#94E2D5' # teal
-white = '#BAC2DE' # subtext1
+black = '#2A2D2E' # surface1
+red = '#EA6962' # red
+green = '#A9B665' # green
+yellow = '#D8A657' # yellow
+blue = '#7DAEA3' # blue
+magenta = '#D3869B' # pink
+cyan = '#89B482' # teal
+white = '#BDAE8B' # subtext1
