@@ -71,6 +71,19 @@
     # EDITOR = "emacs";
   };
 
+  home.file.".zshrc".text = ''
+    export NVM_DIR="$HOME/.nvm"
+      [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+      [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
+    alias tmux_init='tmux new -s $PWD:t:r'
+
+    eval "$(starship init zsh)"
+  '';
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.zsh = {
+    enable = true;
+  };
 }
