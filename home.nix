@@ -77,13 +77,35 @@
       [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
     alias tmux_init='tmux new -s $PWD:t:r'
-
-    eval "$(starship init zsh)"
   '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.zsh = {
-    enable = true;
+
+  # Tells what programs should be managed by home manager
+  programs.zsh.enable = true;
+  programs.starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+            right_format = "$nodejs";
+            add_newline = false;
+            nodejs = {
+                detect_folders = [];
+                format = "\\[[$symbol($version)]($style)\\]";
+            };
+            shell = {
+                disabled = true;
+            };
+            memory_usage = {
+                disabled = true;
+            };
+            line_break = {
+                disabled = true;
+            };
+            package = {
+                disabled = true;
+            };
+      };
   };
 }
