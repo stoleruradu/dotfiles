@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./home/tmux/tmux.nix
-    ./home/nvim/nvim.nix
-    ./home/alacritty/alacritty.nix
+    ./home/tmux
+    ./home/nvim
+    ./home/alacritty
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
