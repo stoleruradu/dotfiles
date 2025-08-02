@@ -4,6 +4,10 @@
   home.packages = with pkgs; [
     neovim
     ripgrep
+    fd
+    tree-sitter
+    nixd
+    nixfmt
   ];
   programs.neovim = {
     viAlias = true;

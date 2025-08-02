@@ -4,8 +4,6 @@ vim.api.nvim_set_keymap('', 'gE', '<nop>', {})
 vim.api.nvim_set_keymap('', 'gh', '<nop>', {})
 vim.api.nvim_set_keymap('', 'gH', '<nop>', {})
 
-vim.keymap.set('i', '<C-o>', '<C-c>O')
-
 vim.api.nvim_set_keymap('n', '<leader>0', '$', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>0', '$', { noremap = true })
 
@@ -39,7 +37,7 @@ vim.api.nvim_set_keymap('x', 'K', ":move '<-2<cr>gv-gv", { noremap = true })
 vim.api.nvim_set_keymap('x', 'J', ":move '>+1<cr>gv-gv", { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeShow<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':Oil<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '-', ':Oil<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>ts', ':split | :terminal<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>t', ':vsplit | :terminal<cr>', { noremap = true, silent = true })
@@ -50,16 +48,12 @@ vim.api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<cr>', { noremap =
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<C-a>', ':source ~/.config/nvim/init.lua<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-s>', ':w<cr>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<C-s>', '<C-c>:w<cr>', { noremap = true })
-
 vim.api.nvim_set_keymap('n', '<leader>q', '<C-W>q', { noremap = true })
 
 vim.keymap.set('n', '<C-U>', '15<C-U>zz')
 vim.keymap.set('n', '<C-D>', '15<C-D>zz')
 
-vim.keymap.set('n', '<leader>ww', function ()
+vim.keymap.set('n', '<leader>d', function ()
   local cords = vim.api.nvim_win_get_cursor(0);
   vim.cmd('vsplit %')
   vim.api.nvim_win_set_cursor(0, cords);

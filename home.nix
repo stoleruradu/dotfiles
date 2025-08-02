@@ -74,25 +74,38 @@
     # EDITOR = "emacs";
   };
 
-  home.file.".zshrc".text = ''
-    export NVM_DIR="$HOME/.nvm"
-      [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-      [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+    # home.file.".zshrc".text = ''
+    #   export NVM_DIR="$HOME/.nvm"
+    #     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+    #     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
-    export PATH=$PATH:~/.docker/bin
+    #   export PATH=$PATH:~/.docker/bin
 
-    alias tmux_init='tmux new -s $PWD:t:r'
-  '';
+    #   alias tmux_init='tmux new -s $PWD:t:r'
+    # '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   # Tells what programs should be managed by home manager
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    shellAliases = rec {
+      tmux_init = "tmux new -s $PWD:t:r";
+    };
+    initContent = ''
+      export NVM_DIR="$HOME/.nvm"
+         [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+         [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+
+      export PATH=$PATH:~/.docker/bin
+    '';
+  };
+
   programs.starship = {
-      enable = true;
-      enableZshIntegration = true;
-      settings = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
             right_format = "$nodejs";
             add_newline = false;
             nodejs = {
