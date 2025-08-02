@@ -8,6 +8,7 @@
     tree-sitter
     nixd
     nixfmt
+    luarocks
   ];
   programs.neovim = {
     viAlias = true;
