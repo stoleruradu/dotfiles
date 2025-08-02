@@ -74,23 +74,13 @@
     # EDITOR = "emacs";
   };
 
-    # home.file.".zshrc".text = ''
-    #   export NVM_DIR="$HOME/.nvm"
-    #     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-    #     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-    #   export PATH=$PATH:~/.docker/bin
-
-    #   alias tmux_init='tmux new -s $PWD:t:r'
-    # '';
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   # Tells what programs should be managed by home manager
   programs.zsh = {
     enable = true;
-    shellAliases = rec {
+    shellAliases = {
       tmux_init = "tmux new -s $PWD:t:r";
     };
     initContent = ''
@@ -106,24 +96,24 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-            right_format = "$nodejs";
-            add_newline = false;
-            nodejs = {
-                detect_folders = [];
-                format = "\\[[$symbol($version)]($style)\\]";
-            };
-            shell = {
-                disabled = true;
-            };
-            memory_usage = {
-                disabled = true;
-            };
-            line_break = {
-                disabled = true;
-            };
-            package = {
-                disabled = true;
-            };
+      right_format = "$nodejs";
+      add_newline = false;
+      nodejs = {
+        detect_folders = [ ];
+        format = "\\[[$symbol($version)]($style)\\]";
       };
+      shell = {
+        disabled = true;
+      };
+      memory_usage = {
+        disabled = true;
+      };
+      line_break = {
+        disabled = true;
+      };
+      package = {
+        disabled = true;
+      };
+    };
   };
 }

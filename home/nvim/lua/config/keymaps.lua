@@ -4,6 +4,9 @@ vim.api.nvim_set_keymap('', 'gE', '<nop>', {})
 vim.api.nvim_set_keymap('', 'gh', '<nop>', {})
 vim.api.nvim_set_keymap('', 'gH', '<nop>', {})
 
+-- LSP
+vim.keymap.set('n', 'gd', '<C-]>');
+
 vim.api.nvim_set_keymap('n', '<leader>0', '$', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>0', '$', { noremap = true })
 
@@ -39,8 +42,7 @@ vim.api.nvim_set_keymap('x', 'J', ":move '>+1<cr>gv-gv", { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeShow<cr>', { noremap = true })
 vim.api.nvim_set_keymap('n', '-', ':Oil<cr>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<leader>ts', ':split | :terminal<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>t', ':vsplit | :terminal<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>`', ':vsplit | :terminal<cr>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>=', ':vertical resize +5<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>-', ':vertical resize -5<cr>', { noremap = true, silent = true })
