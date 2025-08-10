@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
@@ -9,6 +14,7 @@
     nixd
     nixfmt
     luarocks
+    lua5_1
   ];
   programs.neovim = {
     viAlias = true;
